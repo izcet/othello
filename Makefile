@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2017/12/17 12:52:13 by irhett           ###   ########.fr        #
+#    Updated: 2017/12/23 12:13:50 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ XFLAGS		=	#-flags -for -X
 FLAGS		=	$(CFLAGS) $(XFLAGS)
 
 SRC_DIR		=	src
-SRC_FILE	=	main.c #TODO
+SRC_FILE	=	main.c
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
 OBJ_DIR		=	obj
@@ -26,8 +26,8 @@ OBJ_FILE	=	$(SRC_FILE:.c=.o)
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(OBJ_FILE))
 
 LIBFT_DIR	=	libft
-LIBFT_LIB	=	libft.a #assuming project is named the same
-LIBFT_INC	=	#includes directory, if applicable
+LIBFT_LIB	=	libft.a
+LIBFT_INC	=	inc
 LIBFT		=	$(LIBFT_DIR)/$(LIBFT_LIB)
 
 INC_DIR		=	-I $(LIBFT_DIR)/$(LIBFT_INC) -I inc
@@ -37,7 +37,7 @@ INC_DIR		=	-I $(LIBFT_DIR)/$(LIBFT_INC) -I inc
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(SRCS) | $(OBJS)
-	$(CC) $(FLAGS) $(LIBFT) $(OBJS) $(INC_DIR) -o $(NAME) #WARNING: will not compile on linux unless the library is at the end of the line
+	$(CC) $(FLAGS) $(OBJS) $(INC_DIR) -o $(NAME) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) -c $^ $(CFLAGS) $(INC_DIR) -o $@
