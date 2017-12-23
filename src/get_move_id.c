@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   othello.h                                          :+:      :+:    :+:   */
+/*   get_move_id.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/23 13:54:33 by irhett           ###   ########.fr       */
+/*   Created: 2017/12/23 13:48:44 by irhett            #+#    #+#             */
+/*   Updated: 2017/12/23 13:54:13 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OTHELLO_H
-# define OTHELLO_H
+#include "othello.h"
 
-#include <sys/stat.h>
-#include <sys/types.h>
+char	*get_move_id(int move_number, int player_id)
+{
+	char	*id;
+	int		len;
+	int		i;
 
-#include "libft.h"
-#include "othello_structs.h"
-
-// man 2 stat
-// man 2 mkdir
-
-/*
- * struct stat st = {0};
- *
- * if (stat("/some/dir", &st) == -1) {
- * 	mkdir("/some/dir", 0700);
- * }
- */
-
-char	*get_move_id(int move_num, int player_id);
-
-#endif
+	len = ft_numlen(move_number, 26);
+	id = ft_strnew(len);
+	if (!id)
+		return (NULL);
+	i = len;
+	while (i >= 0)
+	{
+		id[i] = 'a' + move_number % 26;
+		i--;
+		move_number /= 26;
+	}
+	if (player_id)
+		ft_strtoupper(id);
+	return (id);
+}
