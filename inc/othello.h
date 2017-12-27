@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/23 13:54:33 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/26 16:39:56 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@
  */
 
 char	*get_move_id(int move_num, int player_id);
+
+void	copy_board_state(t_board *src, t_board *dst);
+void	make_move(t_board *b, t_move *m);
+
 
 #endif
