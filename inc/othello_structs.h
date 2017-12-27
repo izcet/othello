@@ -6,12 +6,34 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/26 16:39:53 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/27 15:04:43 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OTHELLO_STRUCTS_H
 # define OTHELLO_STRUCTS_H
+
+/*
+ * Key for Data Storage
+ *
+ * 	- In Memory (literal char values):
+ * 		0 - Empty
+ * 		1 - Black
+ * 		2 - White
+ * 		3+ Move IDs when checking availability
+ *
+ * 	- On Printout:
+ * 		'-' - empty
+ * 		'x' - black
+ * 		'o' - white
+ * 		'A-Z' (with padding) - Available Moves
+ *
+ * 	- File Naming:
+ * 		'a-z' - black moves, in base 26 notation
+ * 		'A-Z' - white moves, in base 26
+ * 		'0' - black skipped turn
+ * 		'1' - white skipped turn
+ */
 
 /*
  * A Player:
@@ -22,7 +44,7 @@
 typedef struct		s_player
 {
 	char			symbol; // 'o' for black and 'x' for white
-	char			value; // 0 or 1 (black or white)
+	char			value; // 1 or 2 (black or white)
 //	unsigned int	color; // for graphical representations ?
 	struct s_player	*opponent;
 	unsigned int	num_tiles;

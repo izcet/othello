@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2017/12/23 12:13:50 by irhett           ###   ########.fr        #
+#    Updated: 2017/12/27 15:05:25 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ XFLAGS		=	#-flags -for -X
 FLAGS		=	$(CFLAGS) $(XFLAGS)
 
 SRC_DIR		=	src
-SRC_FILE	=	main.c
+SRC_FILE	=	main.c \
+				get_move_id.c
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
 OBJ_DIR		=	obj
