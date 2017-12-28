@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/27 19:33:38 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 00:17:53 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,41 @@
  * }
  */
 
+// game_error.c
 void		*game_error(void *cleanup, char *message);
 
+// get_move_id.c
 char		*get_move_id(int move_num, int player_id);
+
 
 void		copy_board_state(t_board *src, t_board *dst);
 void		make_move(t_board *b, t_move *m);
 
-t_player	*new_player(void /* args */);
+// t_player.c
+t_player	*new_player(char symbol, char value);
 void		del_player(t_player *p);
+t_player	*make_black_player(void);
+t_player	*make_white_player(void);
+int			make_players(t_game *g);
 
-t_board		*new_board(unsigned char size);
-void		del_board(t_board *b);
-
+// t_move.c
 t_move		*new_move(void /* args */);
 void		del_move(t_move *m);
 
+// t_turn.c
 t_turn		*new_turn(void /* args */);
 void		del_turn(t_turn *t);
 
+// t_game.c
 t_game		*new_game(unsigned char size);
 void		del_game(t_game *g);
 
+// t_world.c
 t_world		*new_world(void /* args */);
 void		del_world(t_world *w);
+
+// t_movelist.c
+t_movelist	*new_movelist(void /* args */);
+void		del_movelist(t_movelist *m);
 
 #endif

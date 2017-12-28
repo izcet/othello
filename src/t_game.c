@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:43 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/27 19:41:04 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 00:24:25 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,8 @@ void		del_game(t_game *g)
 				del_turn(g->turn[i]);
 			free(g->turn);
 		}
-		if (g->board)
-		{
-			i = 0;
-			while (i < g->maximum)
-				del_board(g->board[i]);
-			free(g->board);
-		}
+		del_player(g->black);
+		del_player(g->white);
 		free(g);
 	}
 }
@@ -44,35 +39,28 @@ t_game	*new_game(unsigned char size)
 	g = (t_game *)malloc(sizeof(t_game));
 	if (!g)
 		return (game_error(NULL, "new_game malloc() of g"));
+	
 	g->size = size;
 	g->maximum = ((size * size) * 1.5);
 	g->turn_number = 0;
-	g->board = (t_board **)malloc(sizeof(t_board *) * maximum);
-	if (!g->board)
-		return (game_error(g, "new_game malloc() of g->board"));
+	if (make_players(t_game *g))
+		return (game_error(g, "new_game make_players()"));
+	
 	g->turn = (t_turn **)malloc(sizeof(t_turn *) * maximum);
 	if (!g->turn)
-	{
-		del_game(g);
-		return (game_error(NULL, "new_game malloc() of g->turn"));
-	}
+		return (game_error(g, "new_game malloc() of g->turn"));
+
+	// TODO make this into a function in case boundaries need to be extended
 	i = 0;
 	while (i < maximum)
 	{
-		g->board[i] = new_board(size);
-		if (!g->board[i])
-		{
-			del_game(g);
-			return (game_error(NULL, "new_game malloc() of g->board[i]"));
-		}
 		g->turn[i] = new_turn(/*TODO*/);
+		// :TODO
 		if (!g->turn[i])
 		{
 			del_game(g);
 			return (game_error(NULL, "new_game malloc() of g->turn[i]"));
 		}
-		g->board[i]->turn = g->turn[i];
-		g->turn[i]->board = g->board[i];
 		i++;
 	}
 	return (g);

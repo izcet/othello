@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/27 19:37:02 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 00:20:36 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,7 @@ typedef struct		s_player
 	char			value; // 1 or 2 (black or white)
 //	unsigned int	color; // for graphical representations ?
 	struct s_player	*opponent;
-	unsigned int	num_tiles;
 }					t_player;
-
-/*
- * A Board:
- * 	- Has a finite number of tiles
- * 	- Has some metadata about those tiles.
- * 	- Is always square
- * 	- Is used for one turn
- * 	- Has info about the active turn
- */
-typedef struct		s_board
-{
-	char			**tiles;
-	unsigned char	size;
-	unsigned int	num_black;
-	unsigned int	num_white;
-	unsigned int	num_empty;
-	t_turn			*turn;
-}					t_board;
 
 /*
  * A Move:
@@ -89,20 +70,36 @@ typedef struct		s_move
 }					t_move;
 
 /*
+ * A Move List:
+ * 	- Is a linked list of moves
+ * 	- First a list of All Moves is compiled from the board state
+ * 	- Then the duplicates are removed from the list
+ * 	- The remaining moves are incremented for each corresponding duplicate
+ */
+typedef struct		s_mlist
+{
+	t_move			*data;
+	struct s_mlist	*next;
+}					t_movelist;
+
+/*
  * A Turn:
  * 	- Has an active player
  * 	- Has a single board
+ * 	- Has information about the state of the board at this turn (tiles)
  * 	- Has multiple moves available
  * 	- Iterates through each possible move
  */
 typedef struct		s_turn
 {
 	unsigned int	turn_id; // reference to the location in the game. //TODO not necesary?
-	unsigned int	current_move; // iterate through unique moves
-	t_player		*player;
-	t_board			*board;
-	t_move			*all_moves;
-	t_move			*unique_moves;
+	unsigned int	current_move; // iterate through unique moves // TODO not necessary?
+	unsigned char	**board;
+	unsigned int	num_black;
+	unsigned int	num_white;
+	unsigned int	num_empty;
+	t_player		*active_player;
+	t_movelist		*move; // iteration is done by popping the head
 }					t_turn;
 
 /*
@@ -117,11 +114,10 @@ typedef struct		s_game
 	unsigned char	board_size; // default is 8x8
 	unsigned int	maximum; // (board_size * board_size) * 1.5
 	unsigned int	turn_number; // starts at 0, the starting board with no moves made
-	t_board			**board; // array of N boards, where N == maximum
+	t_turn			**turn; // array of N turns, where N == maximum
 							// assumes each game runs 1 to 1, but with the potential of skipped turns
-							// maybe
-	t_turn			**turn; // array of N turns, 
-
+	t_player		*black;
+	t_player		*white;
 }					t_game;
 
 /*
@@ -133,6 +129,8 @@ typedef struct		s_game
 typedef struct		s_world
 {
 	unsigned char	board_size;
+	
+	// wins/loss/draw stats
 	unsigned long	total_games;
 	unsigned long	total_ties;
 	unsigned long	total_wins_black;
@@ -140,7 +138,18 @@ typedef struct		s_world
 	unsigned long	total_board_win_black;
 	unsigned long	total_board_win_white;
 	unsigned long	total_board_incomplete;
-	t_board			*smallest_end;
+	
+	// individual turn stats
+	unsigned long	most_tiles_flipped_black;
+	unsigned long	most_tiles_flipped_white;
+	
+	// esoteric stats
+	unsigned long	most_skipped_black_turns;
+	unsigned long	most_skipped_white_turns;
+	unsigned long	most_skipped_turns;
+	unsigned long	most_consecutive_black_skips;
+	unsigned long	most_consecutive_white_skips;
+
 	t_game			*current; // game root
 }					t_world;
 
