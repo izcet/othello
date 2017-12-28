@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/27 15:04:43 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/27 19:37:02 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ typedef struct		s_player
  */
 typedef struct		s_board
 {
-	t_player		*player; // player to move
 	char			**tiles;
+	unsigned char	size;
 	unsigned int	num_black;
 	unsigned int	num_white;
 	unsigned int	num_empty;
-	t_turn			*active_turn;
+	t_turn			*turn;
 }					t_board;
 
 /*
@@ -86,7 +86,6 @@ typedef struct		s_move
 	unsigned int	num_duplicates; // how many other moves collided with this one
 	unsigned int	num_flipped; // how many tiles would be flipped by this move
 	t_player		*player;
-	t_board			*board;
 }					t_move;
 
 /*
@@ -115,12 +114,13 @@ typedef struct		s_turn
  */
 typedef struct		s_game
 {
-	unsigned char	size; // default is 8x8
+	unsigned char	board_size; // default is 8x8
+	unsigned int	maximum; // (board_size * board_size) * 1.5
 	unsigned int	turn_number; // starts at 0, the starting board with no moves made
-	t_board			*board; // array of N boards, where N == ( board_size^2 ) * 1.5
+	t_board			**board; // array of N boards, where N == maximum
 							// assumes each game runs 1 to 1, but with the potential of skipped turns
 							// maybe
-	t_move			*turns; // array of N turns, 
+	t_turn			**turn; // array of N turns, 
 
 }					t_game;
 
