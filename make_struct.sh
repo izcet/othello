@@ -41,13 +41,14 @@ update_inc () {
 	FILE=$INC_DIR/$INCLUDES.h
 	LAST=$(tail -n 1 $FILE)
 	MOST=$(sed \$d $FILE)
+	#echo "$R$MOST$N"
 
 	STRUCT=$1
 	TYPE=t_$STRUCT
 	CHAR=${STRUCT:0:1}
 
-	echo $MOST > $FILE
-	echo "$TYPE\t*new_$STRUCT(void /* args */);" >> $FILE
+	echo "$MOST" > $FILE
+	echo "\n$TYPE\t*new_$STRUCT(void /* args */);" >> $FILE
 	echo "void\t\tdel_$STRUCT($TYPE *$CHAR);\n" >> $FILE
 	echo "$LAST" >> $FILE
 }
@@ -68,15 +69,14 @@ make_struct () {
 	vim_create $FILE
 
 	echo "#include \"$INCLUDES.h\"\n" >> $FILE
-	
 	echo "void\t\tdel_$STRUCT($TYPE *$CHAR)\n{" >> $FILE
-	echo "\t/* delete data */" >> $FILE
-	echo "\tif ($CHAR)\n\t\tfree($CHAR);\n\t}\n}\n" >> $FILE
+	echo "\tif ($CHAR)\n\t{\n\t\t/* delete data */" >> $FILE
+	echo "\t\tfree($CHAR);\n\t}\n}\n" >> $FILE
 
 	echo "$TYPE\t*new_$STRUCT(void /* args */)\n{" >> $FILE
 	echo "\t$TYPE\t*$CHAR;\n" >> $FILE
 	echo "\t$CHAR = ($TYPE *)malloc(sizeof($TYPE));" >> $FILE
-	echo "\tif (!$CHAR)\n\t{\n\t\treturn (NULL);\n\t}" >> $FILE
+	echo "\tif (!$CHAR)\n\t\treturn (NULL);" >> $FILE
 	echo "\t/* args */" >> $FILE
 	echo "\treturn ($CHAR);\n}" >> $FILE
 }
