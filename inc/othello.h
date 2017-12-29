@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 20:48:59 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 21:10:31 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ t_world		*new_world(void /* args */);
 void		del_world(t_world *w);
 
 // t_movelist.c
-t_movelist	*new_movelist(void /* args */);
+t_movelist	*new_movelist(t_move *data);
 void		del_movelist(t_movelist *m);
+t_movelist	*movelist_add(t_movelist *list, t_move *data);
+t_move		*movelist_pop(t_movelist **head);
 
 #endif

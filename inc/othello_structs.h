@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 20:27:12 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 21:13:41 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct		s_player
  */
 typedef struct		s_move
 {
-	int				x;
-	int				y;
+	unsigned char	x;
+	unsigned char	y;
 	unsigned int	id; // which "move number" it is
 	unsigned int	num_duplicates; // how many other moves collided with this one
 	unsigned int	num_flipped; // how many tiles would be flipped by this move
