@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 00:17:53 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 20:48:59 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void		*game_error(void *cleanup, char *message);
 char		*get_move_id(int move_num, int player_id);
 
 
-void		copy_board_state(t_board *src, t_board *dst);
-void		make_move(t_board *b, t_move *m);
+void		copy_board_state(t_turn *src, t_turn *dst);
+void		make_move(t_turn *b, t_move *m); // TODO <<
 
 // t_player.c
 t_player	*new_player(char symbol, char value);
@@ -57,6 +57,8 @@ void		del_turn(t_turn *t);
 
 // t_game.c
 t_game		*new_game(unsigned char size);
+t_turn		**make_turns(unsigned int maximum);
+t_turn		**extend_game(t_game *g);
 void		del_game(t_game *g);
 
 // t_world.c

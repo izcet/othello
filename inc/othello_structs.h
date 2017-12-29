@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 00:20:36 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 20:27:12 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,13 @@ typedef struct		s_mlist
  */
 typedef struct		s_turn
 {
-	unsigned int	turn_id; // reference to the location in the game. //TODO not necesary?
-	unsigned int	current_move; // iterate through unique moves // TODO not necessary?
+	unsigned char	size;
 	unsigned char	**board;
 	unsigned int	num_black;
 	unsigned int	num_white;
 	unsigned int	num_empty;
+	unsigned int	turn_id; // location in the game. //TODO not necesary?
+	unsigned int	current_move; // TODO not necessary?
 	t_player		*active_player;
 	t_movelist		*move; // iteration is done by popping the head
 }					t_turn;
@@ -112,7 +113,7 @@ typedef struct		s_turn
 typedef struct		s_game
 {
 	unsigned char	board_size; // default is 8x8
-	unsigned int	maximum; // (board_size * board_size) * 1.5
+	unsigned int	num_turns; // (board_size * board_size) * 1.5
 	unsigned int	turn_number; // starts at 0, the starting board with no moves made
 	t_turn			**turn; // array of N turns, where N == maximum
 							// assumes each game runs 1 to 1, but with the potential of skipped turns
