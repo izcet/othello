@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 21:10:31 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/28 21:21:25 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ t_player	*make_white_player(void);
 int			make_players(t_game *g);
 
 // t_move.c
-t_move		*new_move(void /* args */);
+t_move		*new_move(unsigned char x, unsigned char y, unsigned int id, 
+						unsigned int flipped, t_player *active);
 void		del_move(t_move *m);
 
 // t_turn.c
-t_turn		*new_turn(void /* args */);
+t_turn		*new_turn(unsigned char size, unsigned int id, t_player *active);
 void		del_turn(t_turn *t);
 
 // t_game.c
@@ -62,7 +63,7 @@ t_turn		**extend_game(t_game *g);
 void		del_game(t_game *g);
 
 // t_world.c
-t_world		*new_world(void /* args */);
+t_world		*new_world(unsigned char size);
 void		del_world(t_world *w);
 
 // t_movelist.c
