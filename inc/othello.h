@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 21:21:25 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/29 19:45:58 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  * struct stat st = {0};
  *
  * if (stat("/some/dir", &st) == -1) {
- * 	mkdir("/some/dir", 0700);
+ * 	mkdir("/some/dir", 0744);
  * }
  */
 
@@ -71,5 +71,9 @@ t_movelist	*new_movelist(t_move *data);
 void		del_movelist(t_movelist *m);
 t_movelist	*movelist_add(t_movelist *list, t_move *data);
 t_move		*movelist_pop(t_movelist **head);
+
+// t_data.c
+t_data	*new_data(void /* args */);
+void		del_data(t_data *d);
 
 #endif

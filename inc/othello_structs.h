@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 21:13:41 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/29 19:42:31 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,23 @@ typedef struct		s_world
 	unsigned long	most_consecutive_black_skips;
 	unsigned long	most_consecutive_white_skips;
 
-	t_game			*current; // game root
+	t_game			*game; // game root
 }					t_world;
+
+/*
+ * Data:
+ * 	- Contains data about the application
+ * 	- Verbosity level, etc
+ * 	- Ouptut to stdout or to file for log information
+ * 	- Location of game data output (for results)
+ */
+typedef struct		s_data
+{
+	unsigned char	board_size;
+	unsigned char	verbosity; // for logging
+	int				output_fd; // for logging
+	char			*prefix; // for output path
+	t_world			*world;
+}					t_data;
 
 #endif

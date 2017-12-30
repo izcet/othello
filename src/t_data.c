@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_world.c                                          :+:      :+:    :+:   */
+/*   t_data.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/27 16:09:44 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/29 19:37:54 by irhett           ###   ########.fr       */
+/*   Created: 2017/12/29 19:42:49 by irhett            #+#    #+#             */
+/*   Updated: 2017/12/29 19:45:36 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-void		del_world(t_world *w)
+void		del_data(t_data *d)
 {
-	if (w)
+	if (d)
 	{
-		del_game(w->game);
-		free(w);
+		if (d->prefix)
+			free(d->prefix);
+		del_world(d->world);
+		free(d);
 	}
 }
 
-t_world	*new_world(unsigned char size)
+t_data	*new_data(void)
 {
-	t_world	*w;
+	t_data	*d;
 
-	w = (t_world *)malloc(sizeof(t_world));
-	if (!w)
+	d = (t_data *)malloc(sizeof(t_data));
+	if (!d)
 		return (NULL);
-	ft_bzero(w, sizeof(t_world));
-	w->board_size = size;
-	w->game = new_game(size);
-	return (w);
+	d->boardsize = 8;
+	d->verbosity = 0;
+	d->output_fd = 1;
+	d->prefix = NULL;
+	d->world = NULL;
+	return (d);
 }
