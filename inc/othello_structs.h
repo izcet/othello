@@ -45,7 +45,7 @@ typedef struct		s_player
 {
 	char			symbol; // 'o' for black and 'x' for white
 	char			value; // 1 or 2 (black or white)
-//	unsigned int	color; // for graphical representations ?
+	//	unsigned int	color; // for graphical representations ?
 	struct s_player	*opponent;
 }					t_player;
 
@@ -63,9 +63,11 @@ typedef struct		s_move
 {
 	unsigned char	x;
 	unsigned char	y;
+	unsigned char	multiplier; // how many other moves collided with this one
+								// starts at 1
+								// increments per collision
 	unsigned int	id; // which "move number" it is
-	unsigned int	num_duplicates; // how many other moves collided with this one
-	unsigned int	num_flipped; // how many tiles would be flipped by this move
+	unsigned int	flipped; // how many tiles would be flipped by this move
 	t_player		*player;
 }					t_move;
 
@@ -99,7 +101,7 @@ typedef struct		s_turn
 	unsigned int	num_empty;
 	unsigned int	turn_id; // location in the game. //TODO not necesary?
 	unsigned int	current_move; // TODO not necessary?
-	t_player		*active_player;
+	t_player		*active;
 	t_movelist		*move; // iteration is done by popping the head
 }					t_turn;
 
@@ -112,11 +114,13 @@ typedef struct		s_turn
  */
 typedef struct		s_game
 {
-	unsigned char	board_size; // default is 8x8
+	unsigned char	boardsize; // default is 8x8
 	unsigned int	num_turns; // (board_size * board_size) * 1.5
-	unsigned int	turn_number; // starts at 0, the starting board with no moves made
+	unsigned int	turn_number; // starts at 0, 
+								//the starting board with no moves made
 	t_turn			**turn; // array of N turns, where N == maximum
-							// assumes each game runs 1 to 1, but with the potential of skipped turns
+							// assumes each game runs 1 to 1, 
+							// but with the potential of skipped turns
 	t_player		*black;
 	t_player		*white;
 }					t_game;
@@ -129,8 +133,8 @@ typedef struct		s_game
  */
 typedef struct		s_world
 {
-	unsigned char	board_size;
-	
+	unsigned char	boardsize;
+
 	// wins/loss/draw stats
 	unsigned long	total_games;
 	unsigned long	total_ties;
@@ -139,11 +143,11 @@ typedef struct		s_world
 	unsigned long	total_board_win_black;
 	unsigned long	total_board_win_white;
 	unsigned long	total_board_incomplete;
-	
+
 	// individual turn stats
 	unsigned long	most_tiles_flipped_black;
 	unsigned long	most_tiles_flipped_white;
-	
+
 	// esoteric stats
 	unsigned long	most_skipped_black_turns;
 	unsigned long	most_skipped_white_turns;
@@ -163,7 +167,7 @@ typedef struct		s_world
  */
 typedef struct		s_data
 {
-	unsigned char	board_size;
+	unsigned char	boardsize;
 	unsigned char	verbosity; // for logging
 	int				output_fd; // for logging
 	char			*prefix; // for output path

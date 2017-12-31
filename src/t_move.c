@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:41 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 21:04:25 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/30 17:35:58 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_move	*new_move(unsigned char x, unsigned char y, unsigned int id,
 		return (NULL);
 	m->x = x;
 	m->y = y;
+	m->multiplier = 1;
 	m->id = id;
 	m->flipped = flipped;
 	m->player = active;

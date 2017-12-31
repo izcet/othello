@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_data.c                                           :+:      :+:    :+:   */
+/*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/29 19:42:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/30 17:17:20 by irhett           ###   ########.fr       */
+/*   Created: 2017/12/30 17:05:36 by irhett            #+#    #+#             */
+/*   Updated: 2017/12/30 17:23:10 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-void		del_data(t_data *d)
+void		solve(t_data *d)
 {
-	if (d)
+	if (d->verbosity)
 	{
-		if (d->prefix)
-			free(d->prefix);
-		del_world(d->world);
-		free(d);
+		printf("Solving for a board size %ix%i\n", d->boardsize, d->boardsize);
+		// iplement ft_printf_fd
 	}
-}
-
-t_data	*new_data(void)
-{
-	t_data	*d;
-
-	d = (t_data *)malloc(sizeof(t_data));
-	if (!d)
-		return (NULL);
-	d->boardsize = 8;
-	d->verbosity = 0;
-	d->output_fd = 1;
-	d->prefix = ft_strdup(".");
-	d->world = NULL;
-	return (d);
+	printf("solving here...\n");
 }

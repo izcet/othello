@@ -18,8 +18,19 @@ XFLAGS		=	#-flags -for -X
 FLAGS		=	$(CFLAGS) $(XFLAGS)
 
 SRC_DIR		=	src
-SRC_FILE	=	main.c \
-				get_move_id.c
+				# ls src | sort | sed 's/$/ \\/'
+SRC_FILE	=	game_error.c \
+				get_move_id.c \
+				main.c \
+				solve.c \
+				t_data.c \
+				t_game.c \
+				t_move.c \
+				t_movelist.c \
+				t_player.c \
+				t_turn.c \
+				t_world.c \
+
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
 OBJ_DIR		=	obj

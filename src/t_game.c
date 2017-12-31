@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:43 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 20:58:32 by irhett           ###   ########.fr       */
+/*   Updated: 2017/12/30 17:33:55 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	del_game(t_game *g)
 t_turn	**make_turns(unsigned int num)
 {
 	t_turn			**t;
-	unsigned int	i;
 
 	t = (t_turn **)malloc(sizeof(t_turn *) * num);
 	if (!t)
@@ -65,24 +64,24 @@ t_turn	**extend_game(t_game *g)
 	i = 0;
 	while (i < g->num_turns)
 	{
-		temp[i] = g->turns[i];
+		temp[i] = g->turn[i];
 		i++;
 	}
 	while (i < max)
 	{
-		temp[i] = new_turn(size, i, g->turns[i - 1]->active_player->opponent);
+		temp[i] = new_turn(g->boardsize, i, g->turn[i - 1]->active->opponent);
 		if (!temp[i++])
 		{
 			max = i;
 			i = g->num_turns;
 			while (i < max)
-				del_turn(temp[i++])
+				del_turn(temp[i++]);
 			return (game_error(temp, "extend_game new_turn()"));
 		}
 	}
 	g->num_turns = max;
-	free(g->turns);
-	g->turns = temp;
+	free(g->turn);
+	g->turn = temp;
 	return (temp);
 }
 
@@ -94,23 +93,23 @@ t_game	*new_game(unsigned char size)
 	g = (t_game *)malloc(sizeof(t_game));
 	if (!g)
 		return (game_error(NULL, "new_game malloc() of g"));
-	g->size = size;
+	g->boardsize = size;
 	g->num_turns = ((size * size) * 1.5);
 	g->turn_number = 0;
-	if (make_players(t_game *g))
+	if (make_players(g))
 		return (game_error(g, "new_game make_players()"));
 	g->turn = make_turns(g->num_turns);
 	if (!g->turn)
 		return (game_error(g, "new_game make_turns()"));
 
 	i = 0;
-	while (i < num)
+	while (i < g->num_turns)
 	{
 		if (i % 2 == 0)
 			g->turn[i] = new_turn(size, i, g->black);
 		else
 			g->turn[i] = new_turn(size, i, g->white);
-		if (!t[i])
+		if (!g->turn[i])
 		{
 			del_game(g);
 			return (game_error(NULL, "new_game malloc() of g->turn[i]"));
