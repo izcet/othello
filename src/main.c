@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:13 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/30 17:52:09 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/01 21:46:38 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,14 @@ int			parse_args(t_data *d, int argc, char **argv)
 
 int			validate_data(t_data *d)
 {
-	// check if I can write to that directory
-	(void)d->prefix;
+	int		ret;
+	char	*dir;
+
+	dir = ft_strjoin(d->prefix, "/a");
+	ret = mkdir(dir, DIRFLAGS);
+	free(dir);
+	if (ret)
+		return (parse_error("Unable to create directory:", strerror(errno)));
 	return (0);
 }
 

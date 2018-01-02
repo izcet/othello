@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/29 19:45:58 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/01 21:44:03 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <errno.h>
 
 #include <stdio.h> // TODO
 
@@ -23,6 +24,10 @@
 #include "othello_structs.h"
 
 #define FREE_SET(foo, bar) if (foo) free(foo); foo = bar
+
+#define DIR_FLAGS_USER (S_IRUSR | S_IWUSR | S_IXUSR)
+#define DIR_FLAGS_ELSE (S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
+#define DIRFLAGS (DIR_FLAGS_USER | DIR_FLAGS_ELSE)
 
 // man 2 stat
 // man 2 mkdir
