@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/29 19:42:31 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 12:18:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,10 @@ typedef struct		s_turn
 typedef struct		s_game
 {
 	unsigned char	boardsize; // default is 8x8
-	unsigned int	num_turns; // (board_size * board_size) * 1.5
+	unsigned int	num_turns; // for the array bounds
 	unsigned int	turn_number; // starts at 0, 
 								//the starting board with no moves made
+	unsigned int	last_turn; // for the game
 	t_turn			**turn; // array of N turns, where N == maximum
 							// assumes each game runs 1 to 1, 
 							// but with the potential of skipped turns
@@ -126,15 +127,21 @@ typedef struct		s_game
 }					t_game;
 
 /*
- * A World:
+ * Data:
+ * 	- Contains data about the application
+ * 	- Verbosity level, etc
+ * 	- Ouptut to stdout or to file for log information
+ * 	- Location of game data output (for results)
  * 	- Iterates through every single game
  * 	- Keeps track of the metadata accumulated
  * 	- Compares the current game data to previous games
  */
-typedef struct		s_world
+typedef struct		s_data
 {
 	unsigned char	boardsize;
-
+	unsigned char	verbosity; // for logging
+	char			*prefix; // for output path
+	
 	// wins/loss/draw stats
 	unsigned long	total_games;
 	unsigned long	total_ties;
@@ -156,22 +163,6 @@ typedef struct		s_world
 	unsigned long	most_consecutive_white_skips;
 
 	t_game			*game; // game root
-}					t_world;
-
-/*
- * Data:
- * 	- Contains data about the application
- * 	- Verbosity level, etc
- * 	- Ouptut to stdout or to file for log information
- * 	- Location of game data output (for results)
- */
-typedef struct		s_data
-{
-	unsigned char	boardsize;
-	unsigned char	verbosity; // for logging
-	int				output_fd; // for logging
-	char			*prefix; // for output path
-	t_world			*world;
 }					t_data;
 
 #endif

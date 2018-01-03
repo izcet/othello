@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/01 21:44:03 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 12:42:09 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int				make_players(t_game *g);
 t_move			*new_move(unsigned char x, unsigned char y, unsigned int id, 
 							unsigned int flipped, t_player *active);
 void			del_move(t_move *m);
+t_move			*make_move(t_game *g, unsigned char row, unsigned char col,
+							unsigned int id, unsigned int flipped);
 
 // t_turn.c
 t_turn			*new_turn(unsigned char size, unsigned int id, t_player *p);
@@ -67,10 +69,6 @@ t_game			*new_game(unsigned char size);
 t_turn			**make_turns(unsigned int maximum);
 t_turn			**extend_game(t_game *g);
 void			del_game(t_game *g);
-
-// t_world.c
-t_world			*new_world(unsigned char size);
-void			del_world(t_world *w);
 
 // t_movelist.c
 t_movelist		*new_movelist(t_move *data);
@@ -84,8 +82,16 @@ void			del_data(t_data *d);
 
 // solve.c
 void			solve(t_data *d);
+void			start_solve(t_data *d);
+
+// moves.c
+t_movelist		*get_all_moves(t_game *g);
+t_movelist		*simplify_moves(t_movelist *ml, t_game *g);
+
 
 void			copy_board_state(t_turn *src, t_turn *dst);
 void			make_move(t_turn *b, t_move *m); // TODO <<
+void			print_stats(t_data *data);
+unsigned int	is_valid_move(t_game *g, unsigned char row, unsigned char col);
 
 #endif
