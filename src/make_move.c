@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 18:27:45 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 18:49:32 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 19:07:05 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	make_move(t_game *g)
 	copy_board(old, new, g->boardsize);
 	if (old->move)
 	{
-		place_tile(new, old->move->data);
+		place_tile(new, old->move->data, g);
 		flipped = old->move->data->flipped;
 		if (old->active->value = 1)
 		{
