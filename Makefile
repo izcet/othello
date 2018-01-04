@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2017/12/27 15:05:25 by irhett           ###   ########.fr        #
+#    Updated: 2018/01/03 20:27:43 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,11 @@ SRC_DIR		=	src
 				# ls src | sort | sed 's/$/ \\/'
 SRC_FILE	=	game_error.c \
 				get_move_id.c \
+				get_moves.c \
+				is_game_over.c \
+				is_valid_move.c \
 				main.c \
+				record.c \
 				solve.c \
 				t_data.c \
 				t_game.c \
@@ -29,7 +33,8 @@ SRC_FILE	=	game_error.c \
 				t_movelist.c \
 				t_player.c \
 				t_turn.c \
-				t_world.c \
+				take_turn.c \
+
 
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 

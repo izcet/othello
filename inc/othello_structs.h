@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 18:56:16 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:17:27 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct		s_mlist
  */
 typedef struct		s_turn
 {
-	unsigned char	boardsize; // set once, never updated // needed?
+	unsigned char	done;
 	unsigned char	**board; // set once, values updated on enter
 	unsigned int	num_black; // values updated on enter // char not int?
 	unsigned int	num_white; // values updated on enter // char not int?
@@ -113,10 +113,10 @@ typedef struct		s_turn
 typedef struct		s_game
 {
 	unsigned char	boardsize; // default is 8x8
-	unsigned int	num_turns; // for the array bounds
-	unsigned int	turn_number; // starts at 0, 
+	unsigned int	turn_size; // for the array bounds
+	unsigned int	turn_curr; // starts at 0, 
 								//the starting board with no moves made
-	unsigned int	last_turn; // for the game
+	unsigned int	turn_last; // for the game
 	t_turn			**turn; // array of N turns, where N == maximum
 							// assumes each game runs 1 to 1, 
 							// but with the potential of skipped turns

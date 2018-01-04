@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   get_moves.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 12:27:38 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 18:26:38 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:07:10 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ t_movelist		*get_all_moves(t_game *g)
 		col = 0;
 		while (col < g->boardsize)
 		{
-			if (flip = is_valid_move(g, row, col))
+			if ((flip = is_valid_move(g, row, col)))
 				list = movelist_add(list, make_move(g, row, col, id++, flip));
 			col++;
 		}
 		row++;
 	}
-	return (ml);
+	return (list);
 }
 
 t_movelist		*simplify_moves(t_movelist *old, t_game *g)

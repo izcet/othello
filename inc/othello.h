@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 18:56:05 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:27:09 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ t_move			*make_move(t_game *g, unsigned char row, unsigned char col,
 							unsigned int id, unsigned int flipped);
 
 // t_turn.c
-t_turn			*new_turn(unsigned char size, unsigned int id, t_player *p);
-void			del_turn(t_turn *t);
+t_turn			*new_turn(unsigned char size, t_player *p);
+void			del_turn(t_turn *t, unsigned char size);
 
 // t_game.c
 t_game			*new_game(unsigned char size);
@@ -81,7 +81,7 @@ t_data			*new_data(void /* args */);
 void			del_data(t_data *d);
 
 // solve.c
-void			solve(t_data *d);
+void			solve(t_data *d, t_game *g);
 void			start_solve(t_data *d);
 
 // get_moves.c
@@ -95,10 +95,15 @@ unsigned int	is_valid_move(t_game *g, unsigned char row, unsigned char col);
 void			flip_direction(t_turn *t, t_move *m, char r, char c);
 void			place_tile(t_turn *t, t_move *m, t_game *g);
 
-// make_move.c
+// take_turn.c
 void			copy_board(t_turn *src, t_turn *dst, unsigned char boardsize);
-void			make_move(t_game *g);
+void			take_turn(t_game *g);
 
-void			print_stats(t_data *data);
+// record.c
+void			record_stats(t_game *g, t_data *d);
+void			final_stats(t_data *d);
+
+// is_game_over.c
+int				is_game_over(t_game *g);
 
 #endif

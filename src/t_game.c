@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:43 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/30 17:33:55 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:24:33 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	del_game(t_game *g)
 		if (g->turn)
 		{
 			i = 0;
-			while (i < g->num_turns)
-				del_turn(g->turn[i]);
+			while (i < g->turn_size)
+				del_turn(g->turn[i], g->boardsize);
 			free(g->turn);
 		}
 		del_player(g->black);
@@ -46,7 +46,7 @@ t_turn	**make_turns(unsigned int num)
  * copies the existing array of turns to a new one
  * adds new entries to the "extended" part of the array
  * on success, it updates (within the t_game struct)
- * 		- num_turns
+ * 		- turn_size
  * 		- turn
  * on success, it returns the newly created turn variable
  * on failure, the t_game struct is left untouched, and NULL is returned
@@ -57,29 +57,29 @@ t_turn	**extend_game(t_game *g)
 	unsigned int	max;
 	t_turn			**temp;
 
-	max = g->num_turns * 2;
+	max = g->turn_size * 2;
 	temp = make_turns(max);
 	if (!temp)
 		return (game_error(NULL, "extend_game make_turns()"));
 	i = 0;
-	while (i < g->num_turns)
+	while (i < g->turn_size)
 	{
 		temp[i] = g->turn[i];
 		i++;
 	}
 	while (i < max)
 	{
-		temp[i] = new_turn(g->boardsize, i, g->turn[i - 1]->active->opponent);
+		temp[i] = new_turn(g->boardsize, g->turn[i - 1]->active->opponent);
 		if (!temp[i++])
 		{
 			max = i;
-			i = g->num_turns;
+			i = g->turn_size;
 			while (i < max)
-				del_turn(temp[i++]);
+				del_turn(temp[i++], g->boardsize);
 			return (game_error(temp, "extend_game new_turn()"));
 		}
 	}
-	g->num_turns = max;
+	g->turn_size = max;
 	free(g->turn);
 	g->turn = temp;
 	return (temp);
@@ -93,22 +93,22 @@ t_game	*new_game(unsigned char size)
 	g = (t_game *)malloc(sizeof(t_game));
 	if (!g)
 		return (game_error(NULL, "new_game malloc() of g"));
+	ft_bzero(g, sizeof(t_game));
 	g->boardsize = size;
-	g->num_turns = ((size * size) * 1.5);
-	g->turn_number = 0;
+	g->turn_size = ((size * size) * 1.5);
 	if (make_players(g))
 		return (game_error(g, "new_game make_players()"));
-	g->turn = make_turns(g->num_turns);
+	g->turn = make_turns(g->turn_size);
 	if (!g->turn)
 		return (game_error(g, "new_game make_turns()"));
 
 	i = 0;
-	while (i < g->num_turns)
+	while (i < g->turn_size)
 	{
 		if (i % 2 == 0)
-			g->turn[i] = new_turn(size, i, g->black);
+			g->turn[i] = new_turn(size, g->black);
 		else
-			g->turn[i] = new_turn(size, i, g->white);
+			g->turn[i] = new_turn(size, g->white);
 		if (!g->turn[i])
 		{
 			del_game(g);

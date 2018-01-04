@@ -6,13 +6,13 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:42 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/30 17:39:48 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:23:46 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-void		del_turn(t_turn *t)
+void		del_turn(t_turn *t, unsigned char size)
 {
 	unsigned char	i;
 	t_movelist		*temp;
@@ -22,7 +22,7 @@ void		del_turn(t_turn *t)
 		if (t->board)
 		{
 			i = 0;
-			while (i < t->size)
+			while (i < size)
 			{
 				if (t->board[i])
 					free(t->board[i]);
@@ -40,7 +40,7 @@ void		del_turn(t_turn *t)
 	}
 }
 
-t_turn	*new_turn(unsigned char size, unsigned int id, t_player *active)
+t_turn	*new_turn(unsigned char size, t_player *active)
 {
 	t_turn			*t;
 	unsigned int	i;
@@ -48,7 +48,7 @@ t_turn	*new_turn(unsigned char size, unsigned int id, t_player *active)
 	t = (t_turn *)malloc(sizeof(t_turn));
 	if (!t)
 		return (NULL);
-	t->size = size;
+	ft_bzero(t, sizeof(t_turn));
 	t->board = (unsigned char **)malloc(sizeof(unsigned char *) * size);
 	if (!t->board)
 		return (game_error(t, "new_turn malloc() of t->board"));
@@ -58,15 +58,12 @@ t_turn	*new_turn(unsigned char size, unsigned int id, t_player *active)
 		t->board[i] = (unsigned char *)malloc(sizeof(unsigned char) * size);
 		if (!t->board[i])
 		{
-			del_turn(t);
+			del_turn(t, size);
 			return (game_error(NULL, "new_turn malloc() of t->board[i]"));
 		}
 		ft_bzero(t->board[i++], size);
 	}
-	t->num_black = 0;
-	t->num_white = 0;
 	t->num_empty = size * size;
-	t->turn_id = id;
 	t->active = active;
 	t->move = NULL;
 	return (t);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_move.c                                        :+:      :+:    :+:   */
+/*   take_turn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 18:27:45 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 19:07:05 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:26:03 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,20 @@ void	copy_board(t_turn *src, t_turn *dst, unsigned char boardsize)
 	dst->num_empty = src->num_empty;
 }
 
-void	make_move(t_game *g)
+void	take_turn(t_game *g)
 {
 	t_turn			*old;
 	t_turn			*new;
 	unsigned int	flipped;
 
-	if (g->turn_number + 1 >= g->num_turns)
-		extend_game(g);
-	old = g->turns[turn_number];
-	g->turn_number++;
-	new = g->turns[turn_number];
+	old = g->turn[g->turn_curr];
+	new = g->turn[g->turn_curr + 1];
 	copy_board(old, new, g->boardsize);
 	if (old->move)
 	{
 		place_tile(new, old->move->data, g);
 		flipped = old->move->data->flipped;
-		if (old->active->value = 1)
+		if (old->active->value == 1)
 		{
 			new->num_black += flipped + 1;
 			new->num_white -= flipped;

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:13 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 12:20:46 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:16:23 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int			main(int argc, char **argv)
 		return (1);
 	}
 	start_solve(data);
-	print_stats(data);
+	final_stats(data);
 	del_data(data);
 	return (0);
 }
