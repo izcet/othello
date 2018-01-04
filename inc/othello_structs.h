@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 12:18:50 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 18:56:16 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 typedef struct		s_player
 {
 	char			symbol; // 'o' for black and 'x' for white
-	char			value; // 1 or 2 (black or white)
+	unsigned char	value; // 1 or 2 (black or white)
 	//	unsigned int	color; // for graphical representations ?
 	struct s_player	*opponent;
 }					t_player;
@@ -61,8 +61,8 @@ typedef struct		s_player
  */
 typedef struct		s_move
 {
-	unsigned char	x;
-	unsigned char	y;
+	unsigned char	row;
+	unsigned char	col;
 	unsigned char	multiplier; // how many other moves collided with this one
 								// starts at 1
 								// increments per collision
@@ -94,15 +94,13 @@ typedef struct		s_mlist
  */
 typedef struct		s_turn
 {
-	unsigned char	size;
-	unsigned char	**board;
-	unsigned int	num_black;
-	unsigned int	num_white;
-	unsigned int	num_empty;
-	unsigned int	turn_id; // location in the game. //TODO not necesary?
-	unsigned int	current_move; // TODO not necessary?
-	t_player		*active;
-	t_movelist		*move; // iteration is done by popping the head
+	unsigned char	boardsize; // set once, never updated // needed?
+	unsigned char	**board; // set once, values updated on enter
+	unsigned int	num_black; // values updated on enter // char not int?
+	unsigned int	num_white; // values updated on enter // char not int?
+	unsigned int	num_empty; // values updated on enter // char not int?
+	t_player		*active; // set once, never updated
+	t_movelist		*move; // should be empty on enter, updated during
 }					t_turn;
 
 /*

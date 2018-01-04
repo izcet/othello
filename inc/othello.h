@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 12:42:09 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 18:56:05 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			del_game(t_game *g);
 
 // t_movelist.c
 t_movelist		*new_movelist(t_move *data);
-void			del_movelist(t_movelist *m);
+t_movelist		*del_movelist(t_movelist *m);
 t_movelist		*movelist_add(t_movelist *list, t_move *data);
 t_move			*movelist_pop(t_movelist **head);
 
@@ -84,14 +84,21 @@ void			del_data(t_data *d);
 void			solve(t_data *d);
 void			start_solve(t_data *d);
 
-// moves.c
+// get_moves.c
 t_movelist		*get_all_moves(t_game *g);
 t_movelist		*simplify_moves(t_movelist *ml, t_game *g);
 
-
-void			copy_board_state(t_turn *src, t_turn *dst);
-void			make_move(t_turn *b, t_move *m); // TODO <<
-void			print_stats(t_data *data);
+// is_valid_move.c
+unsigned int	check_direction(t_game *g, char r, char c, unsigned char row,
+								unsigned char col);
 unsigned int	is_valid_move(t_game *g, unsigned char row, unsigned char col);
+void			flip_direction(t_turn *t, t_move *m, char r, char c);
+void			place_tile(t_turn *t, t_move *m, t_game *g);
+
+// make_move.c
+void			copy_board(t_turn *src, t_turn *dst, unsigned char boardsize);
+void			make_move(t_game *g);
+
+void			print_stats(t_data *data);
 
 #endif

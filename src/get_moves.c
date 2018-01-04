@@ -6,13 +6,13 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 12:27:38 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 12:43:32 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 18:26:38 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-t_movelist	*get_all_moves(t_game *g)
+t_movelist		*get_all_moves(t_game *g)
 {
 	t_movelist		*list;
 	unsigned char	row;
@@ -37,7 +37,7 @@ t_movelist	*get_all_moves(t_game *g)
 	return (ml);
 }
 
-t_movelist	*simplify_moves(t_movelist *old, t_game *g)
+t_movelist		*simplify_moves(t_movelist *old, t_game *g)
 {
 	t_movelist	*list;
 

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 23:43:30 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/28 21:15:59 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 18:25:35 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@
  * WARNING: Only deletes a single node
  */
 
-void		del_movelist(t_movelist *m)
+t_movelist	*del_movelist(t_movelist *m)
 {
+	t_movelist	*next;
+
+	next = NULL;
 	if (m)
 	{
+		next = m->next;
 		del_move(m->data);
 		free(m);
 	}
+	return (next);
 }
 
 t_movelist	*new_movelist(t_move *data)
