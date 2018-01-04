@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 12:27:38 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:07:10 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:29:23 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_movelist		*simplify_moves(t_movelist *old, t_game *g)
 	t_movelist	*list;
 
 	list = NULL;
+	// TODO
 	(void)old;
 	(void)g;
 	return (list);

@@ -6,14 +6,14 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 23:43:30 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 18:25:35 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:31:51 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
 /*
- * WARNING: Only deletes a single node
+ * Only deletes a single node
  */
 
 t_movelist	*del_movelist(t_movelist *m)
@@ -55,7 +55,7 @@ t_movelist	*movelist_add(t_movelist *list, t_move *data)
 	return (list);
 }
 
-t_move		*movelist_pop(t_movelist **head)
+t_move		*movelist_pop(t_movelist **head) // TODO not needed?
 {
 	t_move		*ret;
 	t_movelist	*temp;

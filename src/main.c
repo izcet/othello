@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:13 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:16:23 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:29:56 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int			game_usage(char	*exec)
 
 int			parse_error(char *first, char *second)
 {
+	// TODO: move this
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(first, 2);
 	ft_putchar_fd(' ', 2);

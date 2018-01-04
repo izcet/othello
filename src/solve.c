@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 17:05:36 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:26:44 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/03 20:30:25 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		start_solve(t_data *d)
 	if (d->verbosity)
 	{
 		printf("Solving for a board size %ix%i\n", d->boardsize, d->boardsize);
-		// iplement ft_printf_fd
+		// TODO iplement ft_printf_fd
 	}
 	if (d->verbosity >= 42) // I shouldn't do anything above 3
 		ft_putendl("This output is gonna be hella verbose!");
