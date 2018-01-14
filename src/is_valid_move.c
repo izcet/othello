@@ -6,14 +6,14 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 17:06:46 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:13:13 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/13 16:51:40 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-unsigned int	check_direction(t_game *g, char r, char c, unsigned char row,
-								unsigned char col)
+unsigned int	check_direction(t_turn *t, unsigned char size, char r, char c,
+								unsigned char row, unsigned char col)
 {
 	unsigned char	opponent;
 	unsigned char	current;
@@ -26,11 +26,11 @@ unsigned int	check_direction(t_game *g, char r, char c, unsigned char row,
 	c_off = c - (char)col;
 	if (r_off == 0 && c_off == 0)
 		return (0);
-	current = g->turn[g->turn_curr]->active->value;
-	opponent = g->turn[g->turn_curr]->active->opponent->value;
-	board = g->turn[g->turn_curr]->board;
+	current = t->active->value;
+	opponent = t->active->opponent->value;
+	board t->board;
 	total = 0;
-	while (r >= 0 && r < (char)g->boardsize && c >= 0 && c < (char)g->boardsize)
+	while (r >= 0 && r < (char)size && c >= 0 && c < (char)size)
 	{
 		if (board[(int)r][(int)c] == opponent)
 			total++;
@@ -44,7 +44,8 @@ unsigned int	check_direction(t_game *g, char r, char c, unsigned char row,
 	return (0);
 }
 
-unsigned int	is_valid_move(t_game *g, unsigned char row, unsigned char col)
+unsigned int	is_valid_move(t_turn *t, unsigned char size, 
+								unsigned char row, unsigned char col)
 {
 	unsigned char	r;
 	unsigned char	c;
@@ -52,19 +53,19 @@ unsigned int	is_valid_move(t_game *g, unsigned char row, unsigned char col)
 	unsigned char	opponent;
 	unsigned char	**board;
 	
-	board = g->turn[g->turn_curr]->board;
+	board = t->board;
 	if (board[row][col] != 0)
 		return (0);
 	total = 0;
-	opponent = g->turn[g->turn_curr]->active->opponent->value;
+	opponent = t->active->opponent->value;
 	r = (row > 0) ? row - 1 : row;
-	while (r <= row + 1 && r < g->boardsize)
+	while (r <= row + 1 && r < size)
 	{
 		c = (col > 0) ? col - 1 : col;
-		while (c <= col + 1 && c < g->boardsize)
+		while (c <= col + 1 && c < size)
 		{
 			if (board[(int)r][(int)c] == opponent)
-				total += check_direction(g, (char)r, (char)c, row, col);
+				total += check_direction(t, size, (char)r, (char)c, row, col);
 			c++;
 		}
 		r++;
@@ -94,18 +95,18 @@ void			flip_direction(t_turn *t, t_move *m, char r, char c)
 	}
 }
 
-void			place_tile(t_turn *t, t_move *m, t_game *g)
+void			place_tile(t_turn *t, t_move *m, unsigned char size)
 {
 	unsigned char	r;
 	unsigned char	c;
 
 	r = (m->row > 0) ? m->row - 1 : m->row;
-	while (r <= m->row + 1 && r < g->boardsize)
+	while (r <= m->row + 1 && r < size)
 	{
 		c = (m->col > 0) ? m->col - 1 : m->col;
-		while (c <= m->col + 1 && c < g->boardsize)
+		while (c <= m->col + 1 && c < size)
 		{
-			if (check_direction(g, r, c, m->row, m->col)) //TODO will game->id?
+			if (check_direction(t, size, r, c, m->row, m->col))
 				flip_direction(t, m, r, c);
 			c++;
 		}

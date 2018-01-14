@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 18:27:45 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:26:03 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/13 16:53:45 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,14 @@ void	copy_board(t_turn *src, t_turn *dst, unsigned char boardsize)
 	dst->num_empty = src->num_empty;
 }
 
-void	take_turn(t_game *g)
+void	take_turn(t_turn *old, t_turn *new, unsigned char size)
 {
-	t_turn			*old;
-	t_turn			*new;
 	unsigned int	flipped;
 
-	old = g->turn[g->turn_curr];
-	new = g->turn[g->turn_curr + 1];
-	copy_board(old, new, g->boardsize);
+	copy_board(old, new, size);
 	if (old->move)
 	{
-		place_tile(new, old->move->data, g);
+		place_tile(new, old->move->data, size);
 		flipped = old->move->data->flipped;
 		if (old->active->value == 1)
 		{
@@ -61,4 +57,6 @@ void	take_turn(t_game *g)
 		}
 		new->num_empty--;
 	}
+	new->move = get_all_moves(new, size);
+	new->move = simplify_moves(new, new->move, size);
 }
