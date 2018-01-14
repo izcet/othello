@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 18:27:45 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/13 16:53:45 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/13 22:40:54 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	take_turn(t_turn *old, t_turn *new, unsigned char size)
 		new->num_empty--;
 	}
 	new->move = get_all_moves(new, size);
-	new->move = simplify_moves(new, new->move, size);
+	if (new->move)
+		new->move = simplify_moves(new, new->move, size);
 }
