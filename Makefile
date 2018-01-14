@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2018/01/03 20:27:43 by irhett           ###   ########.fr        #
+#    Updated: 2018/01/13 15:57:34 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ FLAGS		=	$(CFLAGS) $(XFLAGS)
 
 SRC_DIR		=	src
 				# ls src | sort | sed 's/$/ \\/'
-SRC_FILE	=	game_error.c \
+SRC_FILE	=	board_dupes.c \
+				errors.c \
 				get_move_id.c \
 				get_moves.c \
 				is_game_over.c \

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:13 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:29:56 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/13 14:35:55 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ int			game_usage(char	*exec)
 	ft_putendl("\t-s <size> | Size (Default is 8)");
 	ft_putendl("\t-v  [-v]  | Verbosity level (multiple flags stack)");
 	return (0);
-}
-
-int			parse_error(char *first, char *second)
-{
-	// TODO: move this
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(first, 2);
-	ft_putchar_fd(' ', 2);
-	ft_putendl_fd(second, 2);
-	return (1);
 }
 
 int			parse_args(t_data *d, int argc, char **argv)

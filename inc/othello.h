@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:27:09 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/13 15:57:16 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@
  * }
  */
 
-// game_error.c
+// errors.c
+int				parse_error(char *first, char *second);
 void			*game_error(void *cleanup, char *message);
 
 // get_move_id.c
@@ -105,5 +106,8 @@ void			final_stats(t_data *d);
 
 // is_game_over.c
 int				is_game_over(t_game *g);
+
+// board_dupes.c
+unsigned char	get_duplicates(t_turn *turn);
 
 #endif
