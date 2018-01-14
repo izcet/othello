@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/13 16:56:35 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/13 16:58:16 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ void			final_stats(t_data *d);
 int				is_game_over(t_game *g);
 
 // board_dupes.c
-unsigned char	get_duplicates(t_turn *turn);
+unsigned char	get_duplicates(t_turn *turn, unsigned char size);
 
 #endif

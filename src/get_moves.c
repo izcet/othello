@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 12:27:38 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/13 16:54:07 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/13 16:58:55 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_movelist		*simplify_moves(t_turn *t, t_movelist *old, unsigned char size)
 	list = old;
 	curr = old;
 	id_offset = NULL;
-	board_dupes = get_duplicates(
+	board_dupes = get_duplicates(t, size)
 	// TODO
 	(void)old;
 	(void)g;
