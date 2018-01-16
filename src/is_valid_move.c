@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 17:06:46 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/13 16:51:40 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:40:04 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ unsigned int	check_direction(t_turn *t, unsigned char size, char r, char c,
 		return (0);
 	current = t->active->value;
 	opponent = t->active->opponent->value;
-	board t->board;
+	board = t->board;
 	total = 0;
 	while (r >= 0 && r < (char)size && c >= 0 && c < (char)size)
 	{

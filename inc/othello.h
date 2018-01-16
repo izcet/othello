@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/15 16:59:35 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:44:26 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int				make_players(t_game *g);
 t_move			*new_move(unsigned char x, unsigned char y, unsigned int id, 
 							unsigned int flipped, t_player *active);
 void			del_move(t_move *m);
-t_move			*make_move(t_game *g, unsigned char row, unsigned char col,
-							unsigned int id, unsigned int flipped);
 
 // t_turn.c
 t_turn			*new_turn(unsigned char size, t_player *p);
@@ -99,7 +97,7 @@ void			place_tile(t_turn *t, t_move *m, unsigned char size);
 
 // take_turn.c
 void			copy_board(t_turn *src, t_turn *dst, unsigned char boardsize);
-void			take_turn(t_game *g);
+void			take_turn(t_turn *old, t_turn *nxt, unsigned char boardsize);
 
 // record.c
 void			record_stats(t_game *g, t_data *d);
@@ -112,6 +110,6 @@ int				is_game_over(t_game *g);
 unsigned char	get_duplicates(t_turn *turn, unsigned char size);
 
 // init_board.c
-void			init_board(t_turn *t, unsigned char size);
+void			init_board(t_turn *t, t_game *g);
 
 #endif

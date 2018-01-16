@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:41 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:19:30 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:31:56 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,4 @@ t_move	*new_move(unsigned char row, unsigned char col, unsigned int id,
 	m->flipped = flipped;
 	m->player = active;
 	return (m);
-}
-
-t_move	*make_move(t_game *g, unsigned char row, unsigned char col, 
-					unsigned int num, unsigned int flipped)
-{
-	return (new_move(row, col, num, flipped, g->turn[g->turn_curr]->active));
 }

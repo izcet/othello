@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:43 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:24:33 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:46:06 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	del_game(t_game *g)
 {
-	unsigned int	i;
+	int		i;
 
 	if (g)
 	{
@@ -53,9 +53,9 @@ t_turn	**make_turns(unsigned int num)
  */
 t_turn	**extend_game(t_game *g)
 {
-	unsigned int	i;
-	unsigned int	max;
-	t_turn			**temp;
+	int		i;
+	int		max;
+	t_turn	**temp;
 
 	max = g->turn_size * 2;
 	temp = make_turns(max);
@@ -68,7 +68,7 @@ t_turn	**extend_game(t_game *g)
 		i++;
 	}
 	while (i < max)
-	{
+	{	
 		temp[i] = new_turn(g->boardsize, g->turn[i - 1]->active->opponent);
 		if (!temp[i++])
 		{
@@ -87,8 +87,8 @@ t_turn	**extend_game(t_game *g)
 
 t_game	*new_game(unsigned char size)
 {
-	t_game			*g;
-	unsigned int	i;
+	t_game	*g;
+	int		i;
 
 	g = (t_game *)malloc(sizeof(t_game));
 	if (!g)

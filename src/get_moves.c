@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 12:27:38 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/15 16:27:20 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:36:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_movelist			*get_all_moves(t_turn *t, unsigned char boardsize)
 {
 	t_movelist		*list;
+	t_move			*m;
 	unsigned char	row;
 	unsigned char	col;
 	unsigned int	id;
@@ -28,8 +29,11 @@ t_movelist			*get_all_moves(t_turn *t, unsigned char boardsize)
 		col = 0;
 		while (col < boardsize)
 		{
-			if ((flip = is_valid_move(turn, boardsize, row, col)))
-				list = movelist_add(list, make_move(g, row, col, id++, flip));
+			if ((flip = is_valid_move(t, boardsize, row, col)))
+			{
+				m = new_move(row, col, id++, flip, t->active);
+				list = movelist_add(list, m);
+			}
 			col++;
 		}
 		row++;
@@ -42,7 +46,7 @@ static void			place_move_data(t_turn *t, t_move *m)
 	t->board[m->row][m->col] = m->id + 3;
 }
 
-static unsigned int	get_space_at(t_turn *t, t_move *m, unsigned char rots
+static unsigned int	get_space_at(t_turn *t, t_move *m, unsigned char rots,
 		unsigned char size)
 {
 	unsigned int	col;
@@ -90,7 +94,7 @@ t_movelist			*simplify_moves(t_turn *t, t_movelist *old,
 
 	list = old;
 	curr = old;
-	id_offset = NULL;
+	id_offset = 0;
 	board_dupes = get_duplicates(t, size);
 	if (board_dupes & 127)
 	{
@@ -113,7 +117,7 @@ t_movelist			*simplify_moves(t_turn *t, t_movelist *old,
 				old = temp;
 			}
 			else
-				place_move_data(t, old);
+				place_move_data(t, old->data);
 			old = old->next;
 		}
 

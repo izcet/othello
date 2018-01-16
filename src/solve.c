@@ -6,32 +6,34 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 17:05:36 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/15 17:27:18 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:43:30 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
+#define CURR g->turn_curr
+
 void		solve(t_data *d, t_game *g)
 {
-	if (g->turn_curr + 1 >= g->turn_size)
+	if (CURR + 1 >= g->turn_size)
 		extend_game(g);
-	if (game_over(g))
+	if (is_game_over(g))
 	{
-		g->turn_last = g->turn_curr;
+		g->turn_last = CURR;
 		record_stats(g, d);
-		while (g->turn_curr >= 0 && g->turn[g->turn_curr]->move == NULL)
+		while (CURR >= 0 && g->turn[CURR]->move == NULL)
 		{
-			g->turn[g->turn_curr]->done = 1;
-			g->turn_curr--;
-			if (g->turn_curr >= 0)
-				del_move(movelist_pop(&(g->turn[g->turn_curr]->move)));
+			g->turn[CURR]->done = 1;
+			CURR--;
+			if (CURR >= 0)
+				del_move(movelist_pop(&(g->turn[CURR]->move)));
 		}
 	}
 	else
 	{
-		take_turn(g->turn[g->turn_curr], g->turn[g->turn_curr + 1]);
-		g->turn_curr++;
+		take_turn(g->turn[CURR], g->turn[CURR + 1], g->boardsize);
+		CURR++;
 	}
 }
 
@@ -48,7 +50,7 @@ void		start_solve(t_data *d)
 	printf("solving here...\n");
 	d->game = new_game(d->boardsize);
 	g = d->game;
-	init_board(g->turn[0], g->size, g->black, g->white);
+	init_board(g->turn[0], g);
 	while (g->turn[0]->done == 0) // TODO is done necessary or just t->move
 		solve(d, g);
 }
