@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/13 16:56:37 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 16:20:12 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct		s_move
 	unsigned char	multiplier; // how many other moves collided with this one
 								// starts at 1
 								// increments per collision
-	unsigned int	id; // which "move number" it is
+	unsigned int	id; // zero indexed, offset by 3 in board state
 	unsigned int	flipped; // how many tiles would be flipped by this move
 	t_player		*player;
 }					t_move;
