@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   record.c                                           :+:      :+:    :+:   */
+/*   init_board.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/03 20:14:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/15 16:57:11 by irhett           ###   ########.fr       */
+/*   Created: 2018/01/15 16:58:07 by irhett            #+#    #+#             */
+/*   Updated: 2018/01/15 17:06:17 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-void		record_stats(t_game *g, t_data *d)
+void	init_board(t_turn *t, unsigned char size, t_player *b, t_player *w)
 {
-	// TODO
-	(void)g;
-	(void)d;
-}
-
-void		final_stats(t_data *d)
-{
-	// TODO
-	(void)d;
-
+	
+	t->board[size / 2][(size / 2) - 1] = b->value;
+	t->board[(size / 2) - 1][size / 2] = b->value;
+	t->board[size / 2][size / 2] = w->value;
+	t->board[(size / 2) - 1][(size / 2) - 1] = w->value;
+	t->num_black += 2;
+	t->num_white += 2;
+	t->num_empty -= 4;
 }

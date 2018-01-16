@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2018/01/14 19:25:23 by irhett           ###   ########.fr        #
+#    Updated: 2018/01/15 16:58:55 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_FILE	=	board_dupes.c \
 				errors.c \
 				get_move_id.c \
 				get_moves.c \
+				init_board.c \
 				is_game_over.c \
 				is_valid_move.c \
 				main.c \

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 23:43:30 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 20:31:51 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:12:37 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_movelist	*movelist_add(t_movelist *list, t_move *data)
 	return (list);
 }
 
-t_move		*movelist_pop(t_movelist **head) // TODO not needed?
+t_move		*movelist_pop(t_movelist **head)
 {
 	t_move		*ret;
 	t_movelist	*temp;
@@ -68,5 +68,5 @@ t_move		*movelist_pop(t_movelist **head) // TODO not needed?
 		free(temp);
 		return (ret);
 	}
-	return (game_error(NULL, "movelist_pop NULL parameter"));
+	return (NULL);
 }
