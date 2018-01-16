@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2018/01/15 16:58:55 by irhett           ###   ########.fr        #
+#    Updated: 2018/01/15 17:28:32 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ all: $(LIBFT) $(NAME)
 
 $(NAME): $(SRCS) | $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) $(INC_DIR) -o $(NAME) $(LIBFT)
-M
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) -c $^ $(CFLAGS) $(INC_DIR) -o $@
 

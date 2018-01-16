@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 17:05:36 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/15 17:15:59 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:27:18 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ void		solve(t_data *d, t_game *g)
 	{
 		g->turn_last = g->turn_curr;
 		record_stats(g, d);
-		while (g->turn_curr > 0 && g->turn[g->turn_curr]->move == NULL)
+		while (g->turn_curr >= 0 && g->turn[g->turn_curr]->move == NULL)
 		{
 			g->turn[g->turn_curr]->done = 1;
 			g->turn_curr--;
-			del_move(movelist_pop(&(g->turn[g->turn_curr]->move)));
+			if (g->turn_curr >= 0)
+				del_move(movelist_pop(&(g->turn[g->turn_curr]->move)));
 		}
-		if (g->turn_curr == 0)
-			g->turn[0]->done = 1;
 	}
 	else
 	{

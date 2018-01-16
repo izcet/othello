@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/15 17:08:59 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/15 17:25:54 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ typedef struct		s_game
 {
 	unsigned char	boardsize; // default is 8x8
 	unsigned int	turn_size; // for the array bounds
-	unsigned int	turn_curr; // starts at 0, 
+	int				turn_curr; // starts at 0, 
 								//the starting board with no moves made
-	unsigned int	turn_last; // for the game
+	int				turn_last; // for the game
 	t_turn			**turn; // array of N turns, where N == maximum
 							// assumes each game runs 1 to 1, 
 							// but with the potential of skipped turns
