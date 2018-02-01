@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:13 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/13 14:35:55 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 17:02:16 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int			parse_args(t_data *d, int argc, char **argv)
 			}
 			if (ft_equals(argv[i - 1], "-s"))
 			{
-				d->boardsize = ft_atoi(argv[i]);
-				if (d->boardsize <= 0)
+				g_boardsize = ft_atoi(argv[i]);
+				if (g_boardsize <= 0)
 					return (parse_error("non-positive board size:", argv[i]));
-				if (d->boardsize % 2)
+				if (g_boardsize % 2)
 					return (parse_error("board size must be even:", argv[i]));
 			}
 		}
@@ -75,6 +75,7 @@ int			main(int argc, char **argv)
 {
 	t_data		*data;
 
+	g_boardsize = 8;
 	data = new_data();
 	if (parse_args(data, argc, argv))
 	{

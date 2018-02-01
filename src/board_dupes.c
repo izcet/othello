@@ -6,14 +6,14 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 15:56:18 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/13 16:58:53 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 17:01:33 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
 static unsigned char	is_dupe_board(t_turn *t, unsigned char y_out,
-						unsigned char y, unsigned char x, unsigned char size)
+						unsigned char y, unsigned char x)
 {
 	unsigned int	r;
 	unsigned int	c;
@@ -21,18 +21,18 @@ static unsigned char	is_dupe_board(t_turn *t, unsigned char y_out,
 	unsigned int	xc;
 
 	if (y_out)
-		yr = y ? size - 1 : 0; 
+		yr = y ? g_boardsize - 1 : 0; 
 	else
-		xc = x ? size - 1 : 0;
+		xc = x ? g_boardsize - 1 : 0;
 	r = 0;
-	while (r < size)
+	while (r < g_boardsize)
 	{
 		if (y_out)
-			xc = x ? size - 1 : 0;
+			xc = x ? g_boardsize - 1 : 0;
 		else
-			yr = y ? size - 1 : 0;
+			yr = y ? g_boardsize - 1 : 0;
 		c = 0;
-		while (c < size)
+		while (c < g_boardsize)
 		{
 			if (t->board[r][c] != t->board[yr][xc])
 				return (0);
@@ -51,7 +51,7 @@ static unsigned char	is_dupe_board(t_turn *t, unsigned char y_out,
 	return (1);
 }
 
-unsigned char			get_duplicates(t_turn *t, unsigned char size)
+unsigned char			get_duplicates(t_turn *t)
 {
 	unsigned char	duplicates;
 	unsigned char	curr;
@@ -71,7 +71,7 @@ unsigned char			get_duplicates(t_turn *t, unsigned char size)
 			while (x <= 2)
 			{
 				if (y_out + y + x != 6)
-					duplicates += is_dupe_board(t, y_out, y, x, size) << curr;
+					duplicates += is_dupe_board(t, y_out, y, x) << curr;
 				curr++;
 				x += 2;
 			}

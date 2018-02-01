@@ -6,22 +6,22 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 18:27:45 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/17 13:40:08 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 17:00:15 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-void	copy_board(t_turn *src, t_turn *dst, unsigned char boardsize)
+void	copy_board(t_turn *src, t_turn *dst)
 {
 	unsigned char	r;
 	unsigned char	c;
 
 	r = 0;
-	while (r < boardsize)
+	while (r < g_boardsize)
 	{
 		c = 0;
-		while (c < boardsize)
+		while (c < g_boardsize)
 		{
 			if (src->board[r][c] < 3)
 				dst->board[r][c] = src->board[r][c];
@@ -36,16 +36,16 @@ void	copy_board(t_turn *src, t_turn *dst, unsigned char boardsize)
 	dst->num_empty = src->num_empty;
 }
 
-void	take_turn(t_turn *old, t_turn *new, unsigned char size)
+void	take_turn(t_turn *old, t_turn *new)
 {
 	unsigned int	flipped;
 	t_move			*m;
 
-	copy_board(old, new, size);
+	copy_board(old, new);
 	if (old->move)
 	{
 		m = old->move->data;
-		place_tile(new, m, size);
+		place_tile(new, m);
 		flipped = m->flipped;
 		if (old->active->value == 1)
 		{
@@ -59,8 +59,8 @@ void	take_turn(t_turn *old, t_turn *new, unsigned char size)
 		}
 		new->num_empty--;
 	}
-	new->move = get_all_moves(new, size);
+	new->move = get_all_moves(new);
 	if (new->move)
-		new->move = simplify_moves(new, new->move, size);
+		new->move = simplify_moves(new, new->move);
 	new->done = 0;
 }

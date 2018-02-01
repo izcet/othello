@@ -6,14 +6,14 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 17:06:46 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/15 17:40:04 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:54:56 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-unsigned int	check_direction(t_turn *t, unsigned char size, char r, char c,
-								unsigned char row, unsigned char col)
+unsigned int	check_direction(t_turn *t, char r, char c, unsigned char row,
+								unsigned char col)
 {
 	unsigned char	opponent;
 	unsigned char	current;
@@ -30,7 +30,7 @@ unsigned int	check_direction(t_turn *t, unsigned char size, char r, char c,
 	opponent = t->active->opponent->value;
 	board = t->board;
 	total = 0;
-	while (r >= 0 && r < (char)size && c >= 0 && c < (char)size)
+	while (r >= 0 && r < (char)g_boardsize && c >= 0 && c < (char)g_boardsize)
 	{
 		if (board[(int)r][(int)c] == opponent)
 			total++;
@@ -44,8 +44,7 @@ unsigned int	check_direction(t_turn *t, unsigned char size, char r, char c,
 	return (0);
 }
 
-unsigned int	is_valid_move(t_turn *t, unsigned char size, 
-								unsigned char row, unsigned char col)
+unsigned int	is_valid_move(t_turn *t, unsigned char row, unsigned char col)
 {
 	unsigned char	r;
 	unsigned char	c;
@@ -59,13 +58,13 @@ unsigned int	is_valid_move(t_turn *t, unsigned char size,
 	total = 0;
 	opponent = t->active->opponent->value;
 	r = (row > 0) ? row - 1 : row;
-	while (r <= row + 1 && r < size)
+	while (r <= row + 1 && r < g_boardsize)
 	{
 		c = (col > 0) ? col - 1 : col;
-		while (c <= col + 1 && c < size)
+		while (c <= col + 1 && c < g_boardsize)
 		{
 			if (board[(int)r][(int)c] == opponent)
-				total += check_direction(t, size, (char)r, (char)c, row, col);
+				total += check_direction(t, (char)r, (char)c, row, col);
 			c++;
 		}
 		r++;
@@ -95,18 +94,18 @@ void			flip_direction(t_turn *t, t_move *m, char r, char c)
 	}
 }
 
-void			place_tile(t_turn *t, t_move *m, unsigned char size)
+void			place_tile(t_turn *t, t_move *m)
 {
 	unsigned char	r;
 	unsigned char	c;
 
 	r = (m->row > 0) ? m->row - 1 : m->row;
-	while (r <= m->row + 1 && r < size)
+	while (r <= m->row + 1 && r < g_boardsize)
 	{
 		c = (m->col > 0) ? m->col - 1 : m->col;
-		while (c <= m->col + 1 && c < size)
+		while (c <= m->col + 1 && c < g_boardsize)
 		{
-			if (check_direction(t, size, r, c, m->row, m->col))
+			if (check_direction(t, r, c, m->row, m->col))
 				flip_direction(t, m, r, c);
 			c++;
 		}

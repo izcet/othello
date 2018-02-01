@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/17 13:39:01 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 17:45:18 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 #define DIR_FLAGS_ELSE (S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
 #define DIRFLAGS (DIR_FLAGS_USER | DIR_FLAGS_ELSE)
 
+#define SIZE g_boardsize
+
+unsigned char	g_boardsize;
 // man 2 stat
 // man 2 mkdir
 
@@ -60,11 +63,11 @@ t_move			*new_move(unsigned char x, unsigned char y, unsigned int id,
 void			del_move(t_move *m);
 
 // t_turn.c
-t_turn			*new_turn(unsigned char size, t_player *p);
-void			del_turn(t_turn *t, unsigned char size);
+t_turn			*new_turn(t_player *p);
+void			del_turn(t_turn *t);
 
 // t_game.c
-t_game			*new_game(unsigned char size);
+t_game			*new_game(void);
 t_turn			**make_turns(unsigned int maximum);
 t_turn			**extend_game(t_game *g);
 void			del_game(t_game *g);
@@ -84,22 +87,24 @@ void			solve(t_data *d, t_game *g);
 void			start_solve(t_data *d);
 
 // get_moves.c
-t_movelist		*get_all_moves(t_turn *t, unsigned char size);
-t_movelist		*simplify_moves(t_turn *t, t_movelist *old, unsigned char size);
+t_movelist		*get_all_moves(t_turn *t);
+t_movelist		*simplify_moves(t_turn *t, t_movelist *old);
 
 // is_valid_move.c
-unsigned int	check_direction(t_turn *t, unsigned char size, char r, char c,
-								unsigned char row, unsigned char col);
-unsigned int	is_valid_move(t_turn *t, unsigned char size, unsigned char row,
+unsigned int	check_direction(t_turn *t, char r, char c, unsigned char row,
 								unsigned char col);
+unsigned int	is_valid_move(t_turn *t, unsigned char row, unsigned char col);
 void			flip_direction(t_turn *t, t_move *m, char r, char c);
-void			place_tile(t_turn *t, t_move *m, unsigned char size);
+void			place_tile(t_turn *t, t_move *m);
 
 // take_turn.c
-void			copy_board(t_turn *src, t_turn *dst, unsigned char boardsize);
-void			take_turn(t_turn *old, t_turn *nxt, unsigned char boardsize);
+void			copy_board(t_turn *src, t_turn *dst);
+void			take_turn(t_turn *old, t_turn *nxt);
 
 // record.c
+void			make_path(t_game *g);
+void			save_file(t_game *g);
+void			update_stats(t_game *g, t_data *d);
 void			record_stats(t_game *g, t_data *d);
 void			final_stats(t_data *d);
 
@@ -107,7 +112,7 @@ void			final_stats(t_data *d);
 int				is_game_over(t_game *g);
 
 // board_dupes.c
-unsigned char	get_duplicates(t_turn *turn, unsigned char size);
+unsigned char	get_duplicates(t_turn *turn);
 
 // init_board.c
 void			init_board(t_turn *t, t_game *g);

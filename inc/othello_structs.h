@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/17 13:39:29 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:32:33 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ typedef struct		s_turn
  */
 typedef struct		s_game
 {
-	unsigned char	boardsize; // default is 8x8
 	int				turn_size; // for the array bounds
 	int				turn_curr; // starts at 0, 
 								//the starting board with no moves made
@@ -136,7 +135,6 @@ typedef struct		s_game
  */
 typedef struct		s_data
 {
-	unsigned char	boardsize;
 	unsigned char	verbosity; // for logging
 	char			*prefix; // for output path
 	

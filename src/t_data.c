@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 19:42:49 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/03 12:23:56 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 17:02:32 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_data	*new_data(void)
 	if (!d)
 		return (NULL);
 	ft_bzero(d, sizeof(t_data));
-	d->boardsize = 8;
 	d->prefix = ft_strdup(".");
 	d->game = NULL;
 	return (d);

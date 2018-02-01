@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:43 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/17 13:39:42 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:57:54 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	del_game(t_game *g)
 		{
 			i = 0;
 			while (i < g->turn_size)
-				del_turn(g->turn[i], g->boardsize);
+				del_turn(g->turn[i]);
 			free(g->turn);
 		}
 		del_player(g->black);
@@ -57,7 +57,7 @@ t_turn	**extend_game(t_game *g)
 	int		max;
 	t_turn	**temp;
 
-	max = g->turn_size * 2;
+	max = g->turn_size * 1.5;
 	temp = make_turns(max);
 	if (!temp)
 		return (game_error(NULL, "extend_game make_turns()"));
@@ -69,13 +69,13 @@ t_turn	**extend_game(t_game *g)
 	}
 	while (i < max)
 	{	
-		temp[i] = new_turn(g->boardsize, g->turn[i - 1]->active->opponent);
+		temp[i] = new_turn(g->turn[i - 1]->active->opponent);
 		if (!temp[i++])
 		{
 			max = i;
 			i = g->turn_size;
 			while (i < max)
-				del_turn(temp[i++], g->boardsize);
+				del_turn(temp[i++]);
 			return (game_error(temp, "extend_game new_turn()"));
 		}
 	}
@@ -85,7 +85,7 @@ t_turn	**extend_game(t_game *g)
 	return (temp);
 }
 
-t_game	*new_game(unsigned char size)
+t_game	*new_game(void)
 {
 	t_game	*g;
 	int		i;
@@ -94,8 +94,7 @@ t_game	*new_game(unsigned char size)
 	if (!g)
 		return (game_error(NULL, "new_game malloc() of g"));
 	ft_bzero(g, sizeof(t_game));
-	g->boardsize = size;
-	g->turn_size = ((size * size) * 1.5);
+	g->turn_size = ((g_boardsize * g_boardsize) * 1.5);
 	if (make_players(g))
 		return (game_error(g, "new_game make_players()"));
 	g->turn = make_turns(g->turn_size);
@@ -106,9 +105,9 @@ t_game	*new_game(unsigned char size)
 	while (i < g->turn_size)
 	{
 		if (i % 2 == 0)
-			g->turn[i] = new_turn(size, g->black);
+			g->turn[i] = new_turn(g->black);
 		else
-			g->turn[i] = new_turn(size, g->white);
+			g->turn[i] = new_turn(g->white);
 		if (!g->turn[i])
 		{
 			del_game(g);
