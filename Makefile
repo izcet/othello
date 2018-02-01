@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2018/01/17 13:39:12 by irhett           ###   ########.fr        #
+#    Updated: 2018/01/31 17:53:21 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ SRC_DIR		=	src
 				# ls src | sort | sed 's/$/ \\/'
 SRC_FILE	=	board_dupes.c \
 				errors.c \
-				get_move_id.c \
 				get_moves.c \
 				init_board.c \
 				is_game_over.c \
@@ -29,6 +28,7 @@ SRC_FILE	=	board_dupes.c \
 				main.c \
 				record.c \
 				solve.c \
+				stats.c \
 				t_data.c \
 				t_game.c \
 				t_move.c \

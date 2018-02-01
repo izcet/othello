@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_move_id.c                                      :+:      :+:    :+:   */
+/*   record.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/23 13:48:44 by irhett            #+#    #+#             */
-/*   Updated: 2017/12/23 13:54:13 by irhett           ###   ########.fr       */
+/*   Created: 2018/01/03 20:14:12 by irhett            #+#    #+#             */
+/*   Updated: 2018/01/31 18:16:55 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-char	*get_move_id(int move_number, int player_id)
-{
-	char	*id;
-	int		len;
-	int		i;
 
-	len = ft_numlen(move_number, 26);
-	id = ft_strnew(len);
-	if (!id)
-		return (NULL);
-	i = len;
-	while (i >= 0)
-	{
-		id[i] = 'a' + move_number % 26;
-		i--;
-		move_number /= 26;
-	}
-	if (player_id)
-		ft_strtoupper(id);
-	return (id);
+void		update_stats(t_game *g, t_data *d)
+{
+	(void)g;
+	(void)d;
+}
+
+void		handle_stats(t_game *g, t_data *d)
+{
+	make_path(g);
+	save_file(g);
+	update_stats(g, d);
+}
+
+void		final_stats(t_data *d)
+{
+	// TODO
+	(void)d;
+
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 17:45:18 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 18:09:57 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ unsigned char	g_boardsize;
 // errors.c
 int				parse_error(char *first, char *second);
 void			*game_error(void *cleanup, char *message);
-
-// get_move_id.c
-char			*get_move_id(int move_num, int player_id);
 
 // t_player.c
 t_player		*new_player(char symbol, char value);
@@ -101,12 +98,15 @@ void			place_tile(t_turn *t, t_move *m);
 void			copy_board(t_turn *src, t_turn *dst);
 void			take_turn(t_turn *old, t_turn *nxt);
 
+// stats.c
+void			update_stats(t_game *g, t_data *d);
+void			handle_stats(t_game *g, t_data *d);
+void			final_stats(t_data *d);
+
 // record.c
+int				get_move_id(int move_num, int player_value, char *path);
 void			make_path(t_game *g);
 void			save_file(t_game *g);
-void			update_stats(t_game *g, t_data *d);
-void			record_stats(t_game *g, t_data *d);
-void			final_stats(t_data *d);
 
 // is_game_over.c
 int				is_game_over(t_game *g);

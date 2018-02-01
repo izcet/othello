@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 17:05:36 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 16:56:08 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 18:59:20 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		solve(t_data *d, t_game *g)
 	if (is_game_over(g))
 	{
 		g->turn_last = CURR;
-		record_stats(g, d);
+		handle_stats(g, d);
 		while (CURR >= 0 && g->turn[CURR]->move == NULL)
 		{
 			g->turn[CURR]->done = 1;

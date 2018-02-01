@@ -6,31 +6,29 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 15:56:18 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 17:01:33 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 18:34:42 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "othello.h"
 
-static unsigned char	is_dupe_board(t_turn *t, unsigned char y_out,
-						unsigned char y, unsigned char x)
+static unsigned char	is_dupe_board(t_turn *t, char y_out, char y, char x)
 {
 	unsigned int	r;
 	unsigned int	c;
-	unsigned int	yr;
-	unsigned int	xc;
-
+	unsigned int	yr = 0;
+	unsigned int	xc = 0;
 	if (y_out)
-		yr = y ? g_boardsize - 1 : 0; 
+		yr = y ? 0 : g_boardsize - 1; 
 	else
-		xc = x ? g_boardsize - 1 : 0;
+		xc = x ? 0 : g_boardsize - 1;
 	r = 0;
 	while (r < g_boardsize)
 	{
 		if (y_out)
-			xc = x ? g_boardsize - 1 : 0;
+			xc = x ? 0 : g_boardsize - 1;
 		else
-			yr = y ? g_boardsize - 1 : 0;
+			yr = y ? 0 : g_boardsize - 1;
 		c = 0;
 		while (c < g_boardsize)
 		{
@@ -54,30 +52,14 @@ static unsigned char	is_dupe_board(t_turn *t, unsigned char y_out,
 unsigned char			get_duplicates(t_turn *t)
 {
 	unsigned char	duplicates;
-	unsigned char	curr;
-	unsigned char	y_out;
-	unsigned char	y;
-	unsigned char	x;
 
 	duplicates = 0;
-	curr = 0;
-	y_out = 0;
-	while (y_out <= 2)
-	{
-		y = 0;
-		while (y <= 2)
-		{
-			x = 0;
-			while (x <= 2)
-			{
-				if (y_out + y + x != 6)
-					duplicates += is_dupe_board(t, y_out, y, x) << curr;
-				curr++;
-				x += 2;
-			}
-			y += 2;
-		}
-		y_out += 2;
-	}
+	duplicates += (is_dupe_board(t, 0, 0, 0) << 0);
+	duplicates += (is_dupe_board(t, 0, 0, 2) << 1);
+	duplicates += (is_dupe_board(t, 0, 2, 0) << 2);
+	duplicates += (is_dupe_board(t, 0, 2, 2) << 3);
+	duplicates += (is_dupe_board(t, 2, 0, 0) << 4);
+	duplicates += (is_dupe_board(t, 2, 0, 2) << 5);
+	duplicates += (is_dupe_board(t, 2, 2, 0) << 6);
 	return (duplicates);
 }

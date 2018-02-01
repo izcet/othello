@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 12:27:38 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 16:53:07 by irhett           ###   ########.fr       */
+/*   Updated: 2018/01/31 18:58:54 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static unsigned int	get_space_at(t_turn *t, t_move *m, unsigned char rots)
 	col = (rots & 1 ? m->col : g_boardsize - 1 - m->col);
 	row = (rots & 2 ? m->row : g_boardsize - 1 - m->row);
 	if (rots & 4)
-		return (t->board[row][col]);
-	return (t->board[col][row]);
+		return (t->board[col][row]);
+	return (t->board[row][col]);
 }
 
 static unsigned int	collision_number(t_turn *t, t_move *m, unsigned char dupes)
@@ -117,7 +117,6 @@ t_movelist			*simplify_moves(t_turn *t, t_movelist *old)
 				place_move_data(t, old->data);
 			old = old->next;
 		}
-
 	}
 	return (list);
 }
