@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/02/02 17:50:38 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 19:05:09 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ t_movelist		*simplify_moves(t_turn *t, t_movelist *old);
 
 // is_valid_move.c
 unsigned int	check_direction(t_turn *t, char r, char c, unsigned char row,
+								unsigned char col);
+unsigned int	check_direction2(t_turn *t, char r, char c, unsigned char row,
 								unsigned char col);
 unsigned int	is_valid_move(t_turn *t, unsigned char row, unsigned char col);
 void			flip_direction(t_turn *t, t_move *m, char r, char c);

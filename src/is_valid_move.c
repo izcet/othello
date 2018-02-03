@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 17:06:46 by irhett            #+#    #+#             */
-/*   Updated: 2018/02/02 19:04:01 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 19:06:57 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ unsigned int	check_direction(t_turn *t, char r, char c, unsigned char row,
 	}
 	return (0);
 }
+
+/* 
+** The only difference between the functions above and below is which is the 
+** active player. I have to make this distinction because this function is used
+** in multiple places.
+*/
+
+// TODO refactor to take (t_move *m, unsigned char **board, char r, char c);
 
 unsigned int	check_direction2(t_turn *t, char r, char c, unsigned char row,
 								unsigned char col)
