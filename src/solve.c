@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 17:05:36 by irhett            #+#    #+#             */
-/*   Updated: 2018/02/02 15:58:51 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 18:40:40 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void		solve(t_data *d, t_game *g)
 {
 	if (CURR + 1 >= g->turn_size)
 		extend_game(g);
+	if (CURR > 2)
+		exit(0);
 	if (is_game_over(g))
 	{
 		g->turn_last = CURR;

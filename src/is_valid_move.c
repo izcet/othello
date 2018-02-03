@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 17:06:46 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 16:54:56 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 19:04:01 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,38 @@ unsigned int	check_direction(t_turn *t, char r, char c, unsigned char row,
 		return (0);
 	current = t->active->value;
 	opponent = t->active->opponent->value;
+	board = t->board;
+	total = 0;
+	while (r >= 0 && r < (char)g_boardsize && c >= 0 && c < (char)g_boardsize)
+	{
+		if (board[(int)r][(int)c] == opponent)
+			total++;
+		else if (board[(int)r][(int)c] == current)
+			return (total);
+		else
+			return (0);
+		r += r_off;
+		c += c_off;
+	}
+	return (0);
+}
+
+unsigned int	check_direction2(t_turn *t, char r, char c, unsigned char row,
+								unsigned char col)
+{
+	unsigned char	opponent;
+	unsigned char	current;
+	unsigned int	total;
+	char			r_off;
+	char			c_off;
+	unsigned char	**board;
+
+	r_off = r - (char)row;
+	c_off = c - (char)col;
+	if (r_off == 0 && c_off == 0)
+		return (0);
+	opponent = t->active->value;
+	current = t->active->opponent->value;
 	board = t->board;
 	total = 0;
 	while (r >= 0 && r < (char)g_boardsize && c >= 0 && c < (char)g_boardsize)
@@ -87,7 +119,7 @@ void			flip_direction(t_turn *t, t_move *m, char r, char c)
 	opponent = m->player->opponent->value;
 	while (t->board[(int)r][(int)c] != current)
 	{
-		if (t->board[(int)r][(int)c] == opponent)
+		//if (t->board[(int)r][(int)c] == opponent)
 			t->board[(int)r][(int)c] = current;
 		r += r_off;
 		c += c_off;
@@ -99,17 +131,24 @@ void			place_tile(t_turn *t, t_move *m)
 	unsigned char	r;
 	unsigned char	c;
 
-	r = (m->row > 0) ? m->row - 1 : m->row;
+	r = (m->row > 0) ? m->row - 1 : 0;
 	while (r <= m->row + 1 && r < g_boardsize)
 	{
-		c = (m->col > 0) ? m->col - 1 : m->col;
+		c = (m->col > 0) ? m->col - 1 : 0;
 		while (c <= m->col + 1 && c < g_boardsize)
 		{
-			if (check_direction(t, r, c, m->row, m->col))
+			if (check_direction2(t, r, c, m->row, m->col))
+			{
+				printf("yep\n");
 				flip_direction(t, m, r, c);
+			}
+			else
+				printf("nope\n");
 			c++;
 		}
 		r++;
+		printf("\n");
 	}
 	t->board[m->row][m->col] = m->player->value;
+	printf("\n");
 }

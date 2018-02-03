@@ -1,0 +1,59 @@
+-a--
+-OX-
+-XO-
+----
+
+-a--
+-OX-
+-XO-
+----
+
+-a--
+-OX-
+-XO-
+----
+
+-a--
+-OX-
+-XO-
+----
+
+-X--
+-OX-
+-XO-
+----
+
+-XO-
+-OX-
+-XO-
+----
+
+-XOX
+-OX-
+-XO-
+----
+
+solving here...
+duplicates is 25
+id_offset is 0
+cur is 0 | col is 0
+cur is 3 | col is 3
+collision number is 3
+
+id_offset is 1
+cur is 0 | col is 3
+collision number is 3
+
+id_offset is 2
+cur is 0 | col is 0
+cur is 3 | col is 0
+cur is 4 | col is 3
+collision number is 3
+
+---------------------DONE---------------------
+duplicates is 0
+---------------------DONE---------------------
+duplicates is 0
+---------------------DONE---------------------
+duplicates is 0
+---------------------DONE---------------------

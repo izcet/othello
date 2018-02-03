@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/17 12:52:13 by irhett            #+#    #+#              #
-#    Updated: 2018/01/31 17:53:21 by irhett           ###   ########.fr        #
+#    Updated: 2018/02/02 17:45:21 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRC_FILE	=	board_dupes.c \
 				t_player.c \
 				t_turn.c \
 				take_turn.c \
+				print_board.c \
+
 
 
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))

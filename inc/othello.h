@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 18:09:57 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 17:50:38 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,8 @@ unsigned char	get_duplicates(t_turn *turn);
 
 // init_board.c
 void			init_board(t_turn *t, t_game *g);
+
+// print_board.c
+void			print_board(unsigned char **board);
 
 #endif

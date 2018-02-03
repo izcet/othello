@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 12:52:12 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 16:32:33 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 17:54:28 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
  *
  * 	- On Printout:
  * 		'-' - empty
- * 		'x' - black
- * 		'o' - white
- * 		'A-Z' (with padding) - Available Moves
+ * 		'X' - black
+ * 		'O' - white
+ * 		'a-z' (with padding) - Available Moves
  *
  * 	- File Naming:
  * 		'a-z' - black moves, in base 26 notation
