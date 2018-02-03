@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 17:05:36 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 18:59:20 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 15:58:51 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		start_solve(t_data *d)
 	}
 	if (d->verbosity >= 42) // I shouldn't do anything above 3
 		ft_putendl("This output is gonna be hella verbose!");
-	printf("solving here...\n");
+	printf("solving here...\n"); // TODO
 	d->game = new_game();
 	g = d->game;
 	init_board(g->turn[0], g);

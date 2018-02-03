@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:09:43 by irhett            #+#    #+#             */
-/*   Updated: 2018/01/31 16:57:54 by irhett           ###   ########.fr       */
+/*   Updated: 2018/02/02 15:57:30 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	del_game(t_game *g)
 		{
 			i = 0;
 			while (i < g->turn_size)
-				del_turn(g->turn[i]);
+				del_turn(g->turn[i++]);
 			free(g->turn);
 		}
 		del_player(g->black);
